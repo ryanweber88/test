@@ -1,0 +1,78 @@
+var http = require('http');
+var express = require('express');
+var app = express();
+var mongoose = require('mongoose');
+
+mongoose.connect('mongodb://ryanweber88:Snickers1@novus.modulusmongo.net:27017/hOdu5jix');
+
+app.configure(function() {
+	app.use(express.static(__dirname + '/public')); 		// set the static files location /public/img will be /img for users
+	app.use(express.logger('dev')); 						// log every request to the console
+	app.use(express.bodyParser()); 							// pull information from html in POST
+	app.use(express.methodOverride()); 						// simulate DELETE and PUT
+});
+
+var Directory = mongoose.model('Directory', {
+	text : String,
+	hierarchy : Number
+});
+
+
+app.get('/api/dirs', function(req, res) {
+
+	Directory.find(function(err, dirs) {
+
+		if (err) { res.send(err); }
+		res.json(dirs);
+	});
+});
+
+
+app.post('/api/dirs', function(req, res) {
+
+	// create a todo, information comes from AJAX request from Angular
+	Directory.create({
+		text : req.body.text,
+		done : false
+	}, function(err, todo) {
+		if (err){ res.send(err); }
+
+		// get and return all the todos after you create another
+		Directory.find(function(err, dirs) {
+			if (err) { res.send(err); }
+			res.json(dirs);
+		});
+	});
+});
+
+app.delete('/api/dirs/:dir_id', function(req, res) {
+	Directory.remove({
+		_id : req.params.dir_id
+	}, function(err, dir) {
+		if (err) { res.send(err); }
+
+		// get and return all the todos after you create another
+		Directory.find(function(err, dirs) {
+			if (err) { res.send(err); }
+			res.json(dirs);
+		});
+	});
+});
+
+
+
+app.get('*', function(req, res) {
+	res.sendfile('./public/index.html'); // load the single view file (angular will handle the page changes on the front-end)
+});
+
+
+app.listen(8080);
+console.log('Listening on port 8080');
+
+/*
+http.createServer(function (req, res) {
+  res.writeHead(200, {'Content-Type': 'text/plain'});
+  res.end('Hello World!\n');
+}).listen(3000);
+console.log('Server running at http://<your server ip address>:3000/');
+*/
