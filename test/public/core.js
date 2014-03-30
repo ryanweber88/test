@@ -239,8 +239,12 @@ $(document).ready(function(){
 	            switch ( key ) {
 	            	case 'generate_randoms':
 	            		console.log('generating randoms');
+	            		break;
 	            	case 'remove_node':
 	            		console.log('remove node');
+	            		break;
+	            	default:
+	            		console.log('nil');
 	            }
 	        },
 	        items: {
