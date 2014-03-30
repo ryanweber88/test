@@ -22,9 +22,9 @@ function sendTest() {
     io.sockets.emit('test', { test: "this is a test" });
 }
 
-setTimeout(sendTime, 10000);
+setInterval(sendTime, 10000);
 
-setTimeout(sendTest, 3000);
+setInterval(sendTest, 3000);
 
 // Emit welcome message on connection
 io.sockets.on('connection', function(socket) {
