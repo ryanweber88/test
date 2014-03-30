@@ -18,8 +18,14 @@ function sendTime() {
     io.sockets.emit('time', { time: new Date().toJSON() });
 }
 
+function sendTest() {
+    io.sockets.emit('test', { test: 'this is a test' });
+}
+
 // Send current time every 10 secs
 setTimeout(sendTime, 10000);
+
+sendTest();
 
 // Emit welcome message on connection
 io.sockets.on('connection', function(socket) {
