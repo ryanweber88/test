@@ -158,9 +158,10 @@ function mainController($scope, $http) {
 			});
 	};
 
-}
 
-$(document).ready(function(){
+
+
+
 
 	// Setup jstree
     $('#tree_view').jstree({
@@ -195,7 +196,7 @@ $(document).ready(function(){
 	            		break;
 	            	case 'remove_node':
 	            		// var id_to_remove = $(this).attr('href');
-	            		console.log('removed node');
+	            		console.log('removing node');
 	            		// console.log($(this).attr('href'));
 	            		//console.log('dir id - ' + dir_id);
 	      //       		$http.delete('/api/dirs/' + id_to_remove)
@@ -206,7 +207,10 @@ $(document).ready(function(){
 							// .error(function(data) {
 							// 	console.log('Error: ' + data);
 							// });
-	    				// $scope.deleteDir(id_to_remove);
+	    				$scope.deleteDir(id_to_remove);
+	    	// 			$.post('/api/dirs/' + id_to_remove, function (response) {
+						// 	console.log(response);
+						// });
 	            		break;
 	            	default:
 	            		console.log('nil');
@@ -216,7 +220,7 @@ $(document).ready(function(){
 				show: function(opt) {
 					var id_to_remove = $(this).attr('href');
 					//opt.$menu.find('.context-menu-item > span').attr('data-remove', id_to_remove);
-					opt.$menu.find('.context-menu-item > span').attr('ng-click', 'deleteDir(' + id_to_remove + ')');
+					//opt.$menu.find('.context-menu-item > span').attr('ng-click', 'deleteDir(' + id_to_remove + ')');
 				}
 			},
 	        items: {
@@ -227,6 +231,85 @@ $(document).ready(function(){
 	        }
 	    });
 	});
+
+
+
+
+
+
+
+}
+
+$(document).ready(function(){
+
+	// // Setup jstree
+ //    $('#tree_view').jstree({
+	// 	'core' : {
+	// 	    'data' : [
+	// 			{
+	// 				'text' : 'Root',
+	// 				'state' : {
+	// 					'opened' : true,
+	// 					'selected' : true
+	// 				},
+	// 				'children' : [
+	// 					{ 'text' : 'Child 1' },
+	// 					{ 'text' : 'Child 2' },
+
+	// 				]
+	// 			}
+	// 	    ],
+	// 	    "themes" : { "theme": "default" },
+	// 	    "plugins" : [ "themes", "ui" ]
+	// 	}
+ // 	});
+
+	// $(function(){
+	//     $.contextMenu({
+	//         selector: '.jstree-anchor', 
+	//         callback: function(key, options) {
+
+	//             switch ( key ) {
+	//             	case 'generate_randoms':
+	//             		console.log('generating randoms');
+	//             		break;
+	//             	case 'remove_node':
+	//             		// var id_to_remove = $(this).attr('href');
+	//             		console.log('removed node');
+	//             		// console.log($(this).attr('href'));
+	//             		//console.log('dir id - ' + dir_id);
+	//       //       		$http.delete('/api/dirs/' + id_to_remove)
+	// 						// .success(function(data) {
+	// 						// 	$scope.dirs = data;
+	// 						// 	rewriteDirs(data);
+	// 						// })
+	// 						// .error(function(data) {
+	// 						// 	console.log('Error: ' + data);
+	// 						// });
+	//     				// $scope.deleteDir(id_to_remove);
+	//     				$.post('/api/dirs/' + id_to_remove, function (response) {
+	// 						console.log(response);
+	// 					});
+	//             		break;
+	//             	default:
+	//             		console.log('nil');
+	//             }
+	//         },
+	//         events: {
+	// 			show: function(opt) {
+	// 				var id_to_remove = $(this).attr('href');
+	// 				//opt.$menu.find('.context-menu-item > span').attr('data-remove', id_to_remove);
+	// 				opt.$menu.find('.context-menu-item > span').attr('ng-click', 'deleteDir(' + id_to_remove + ')');
+	// 			}
+	// 		},
+	//         items: {
+	//             "generate_randoms": {name: "Generate Numbers"},
+	//             "remove_node": {name: "Remove Node"},
+	//             "sep1": "---------",
+	//             "quit": {name: "Quit"}
+	//         }
+	//     });
+	// });
 
 });
 
