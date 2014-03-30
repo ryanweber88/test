@@ -194,9 +194,9 @@ $(document).ready(function(){
 	            		console.log('generating randoms');
 	            		break;
 	            	case 'remove_node':
-	            		var id_to_remove = $(this).attr('href');
-	            		console.log('remove node');
-	            		console.log($(this).attr('href'));
+	            		// var id_to_remove = $(this).attr('href');
+	            		console.log('removed node');
+	            		// console.log($(this).attr('href'));
 	            		//console.log('dir id - ' + dir_id);
 	      //       		$http.delete('/api/dirs/' + id_to_remove)
 							// .success(function(data) {
@@ -206,7 +206,7 @@ $(document).ready(function(){
 							// .error(function(data) {
 							// 	console.log('Error: ' + data);
 							// });
-	    				$scope.deleteDir(id_to_remove);
+	    				// $scope.deleteDir(id_to_remove);
 	            		break;
 	            	default:
 	            		console.log('nil');
