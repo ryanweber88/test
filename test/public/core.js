@@ -50,7 +50,7 @@ function rewriteDirs(dirs) {
 				'text': dirs[index].text + ' ' + dirs[index].pool,
 				'state': {
 					'selected' : false
-				}
+				},
 				children:[]
 			}
 		);
