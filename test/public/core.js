@@ -234,6 +234,8 @@ $(document).ready(function(){
 	            // var m = "clicked: " + key;
 	            // console.log(m);
 
+	            console.log('key - ' + key);
+
 	            switch ( key ) {
 	            	case 'generate_randoms':
 	            		console.log('generating randoms');
