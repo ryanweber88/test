@@ -204,6 +204,8 @@ function mainController($scope, $http) {
 }
 
 $(document).ready(function(){
+
+	// Setup jstree
     $('#tree_view').jstree({
 		'core' : {
 		    'data' : [
@@ -224,5 +226,10 @@ $(document).ready(function(){
 		    "plugins" : [ "themes", "ui" ]
 		}
  	});
+
+ 	// Right click for dirs
+ 	$('.jstree-anchor').on('contextmenu', function(e) {
+	    console.log('right clicked!');
+	});
 });
 
