@@ -189,24 +189,23 @@ $(document).ready(function(){
 	        selector: '.jstree-anchor', 
 	        callback: function(key, options) {
 
-	            // console.log('key - ' + key);
-
 	            switch ( key ) {
 	            	case 'generate_randoms':
 	            		console.log('generating randoms');
 	            		break;
 	            	case 'remove_node':
+	            		var id_to_remove = $(this).attr('href');
 	            		console.log('remove node');
 	            		console.log($(this).attr('href'));
 	            		//console.log('dir id - ' + dir_id);
-	      //       		$http.delete('/api/dirs/' + id)
-							// .success(function(data) {
-							// 	$scope.dirs = data;
-							// 	// console.log(data);
-							// })
-							// .error(function(data) {
-							// 	console.log('Error: ' + data);
-							// });
+	            		$http.delete('/api/dirs/' + id_to_remove)
+							.success(function(data) {
+								$scope.dirs = data;
+								rewriteDirs(data);
+							})
+							.error(function(data) {
+								console.log('Error: ' + data);
+							});
 	            		break;
 	            	default:
 	            		console.log('nil');
