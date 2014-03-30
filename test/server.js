@@ -81,6 +81,7 @@ app.delete('/api/dirs/:dir_id', function(req, res) {
 			if (err) { res.send(err); }
 			res.json(dirs);
 			io.sockets.emit('removed', { msg: 'removed post' });
+			console.log(dirs);
 		});
 	});
 });

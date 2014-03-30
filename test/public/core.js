@@ -35,7 +35,7 @@ function mainController($scope, $http) {
 	$http.get('/api/dirs')
 		.success(function(data) {
 			$scope.dirs = data;
-			console.log(data);
+			// console.log(data);
 		})
 		.error(function(data) {
 			console.log('Error: ' + data);
@@ -47,7 +47,7 @@ function mainController($scope, $http) {
 			.success(function(data) {
 				$scope.formData = {}; // clear the form so our user is ready to enter another
 				$scope.dirs = data;
-				console.log(data);
+				// console.log(data);
 			})
 			.error(function(data) {
 				console.log('Error: ' + data);
@@ -59,7 +59,7 @@ function mainController($scope, $http) {
 		$http.delete('/api/dirs/' + id)
 			.success(function(data) {
 				$scope.dirs = data;
-				console.log(data);
+				// console.log(data);
 			})
 			.error(function(data) {
 				console.log('Error: ' + data);
