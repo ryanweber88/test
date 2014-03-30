@@ -152,6 +152,7 @@ function mainController($scope, $http) {
 			.success(function(data) {
 				$scope.dirs = data;
 				console.log('deleted');
+				rewriteDirs(data);
 			})
 			.error(function(data) {
 				console.log('Error: ' + data);
