@@ -195,7 +195,7 @@ function mainController($scope, $http) {
 	            		console.log('generating randoms');
 	            		break;
 	            	case 'remove_node':
-	            		// var id_to_remove = $(this).attr('href');
+	            		var id_to_remove = $(this).attr('href');
 	            		console.log('removing node');
 	            		// console.log($(this).attr('href'));
 	            		//console.log('dir id - ' + dir_id);
