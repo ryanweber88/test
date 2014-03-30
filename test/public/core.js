@@ -69,28 +69,22 @@ function mainController($scope, $http) {
 }
 
 $(document).ready(function(){
-    $("#tree_view").jstree({
-        "json_data" : {
-            "data":[
-                {
-                    "data" : "Search engines",
-                    "children" :[
-                                 {"data":"Yahoo"},
-                                 {"data":"Bing"},
-                                 {"data":"Google", "children":[{"data":"Youtube"},{"data":"Gmail"},{"data":"Orkut"}]}
-                                ]
-                },
-                {
-                    "data" : "Networking sites",
-                    "children" :[
-                        {"data":"Facebook"},
-                        {"data":"Twitter"}
-                    ]
-                }
-            ]
-        },
-        "plugins" : [ "themes", "json_data", "ui" ]
-    });
+    $('#tree_view').jstree({ 'core' : {
+    'data' : [
+		'Simple root node',
+		{
+			'text' : 'Root node 2',
+			'state' : {
+				'opened' : true,
+				'selected' : true
+			},
+			'children' : [
+				{ 'text' : 'Child 1' },
+				'Child 2'
+			]
+		}
+    ]
+} });
 
 });
 
