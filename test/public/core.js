@@ -76,6 +76,8 @@ function mainController($scope, $http) {
 				var children = [];
 
 				for ( index in data ) {
+					var random_lower = Math.floor(Math.random() * 1000);
+					console.log('lower' + random_lower);
 					children.push({
 						'text': data[index].text + ' ' + data[index].pool
 					});
