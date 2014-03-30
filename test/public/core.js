@@ -233,7 +233,8 @@ $(document).ready(function(){
 	//     console.log('right clicked!');
 	// });
 
-	$('.jstree-anchor').mousedown(function(e){ 
+	$('.jstree-anchor').on('mousedown', function(e) {
+		e.preventDefault();
 		switch (e.which) {
 	        case 3:
 	            console.log('right click');
