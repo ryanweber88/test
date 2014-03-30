@@ -31,26 +31,17 @@ socket.on('client_console', function(data) {
 });
 
 socket.on('new_dirs', function(data) {
-	rewriteDirs(data.data);
+	rewriteDirs(data.dirs);
 });
 
-function rewriteDirs(data) {
+function rewriteDirs(dirs) {
 	var children = [];
 
-	console.log('rewrite data?');
-	console.log(data);
-
-	for ( index in data ) {
-		console.log('index - ' + index);
-		console.log('data in - ');
-		console.log(data[index]);
-
+	for ( index in dirs ) {
 		children.push({
-			'text': data[index].text + ' ' + data[index].pool
+			'text': dirs[index].text + ' ' + dirs[index].pool
 		});
 	}
-
-	console.log('tree rewritten');
 
 	$('#tree_view').jstree('destroy');
 
@@ -88,34 +79,36 @@ function mainController($scope, $http) {
 	// Get all directories and show tree
 	$http.get('/api/start')
 		.success(function(data) {
-			var children = [];
+			rewriteDirs(data);
 
-			for ( index in data ) {
-				children.push({
-					'text': data[index].text + ' ' + data[index].pool
-				});
-			}
+			// var children = [];
 
-			console.log('tree start');
+			// for ( index in data ) {
+			// 	children.push({
+			// 		'text': data[index].text + ' ' + data[index].pool
+			// 	});
+			// }
 
-			$('#tree_view').jstree('destroy');
+			// console.log('tree start');
 
-			$('#tree_view').jstree({
-				'core' : {
-				    'data' : [
-						{
-							'text' : 'Root',
-							'state' : {
-								'opened' : true,
-								'selected' : true
-							},
-							'children' : children
-						}
-				    ],
-				    "themes" : { "theme": "default" },
-				    "plugins" : [ "themes", "ui" ]
-				}
-		 	});
+			// $('#tree_view').jstree('destroy');
+
+			// $('#tree_view').jstree({
+			// 	'core' : {
+			// 	    'data' : [
+			// 			{
+			// 				'text' : 'Root',
+			// 				'state' : {
+			// 					'opened' : true,
+			// 					'selected' : true
+			// 				},
+			// 				'children' : children
+			// 			}
+			// 	    ],
+			// 	    "themes" : { "theme": "default" },
+			// 	    "plugins" : [ "themes", "ui" ]
+			// 	}
+		 // 	});
 		})
 		.error(function(data) {
 			console.log('Error: ' + data);
