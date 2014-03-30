@@ -35,29 +35,63 @@ socket.on('new_dirs', function(data) {
 });
 
 function rewriteDirs(dirs) {
+	var data = [];
 	var children = [];
 
 	for ( index in dirs ) {
-		children.push({
-			attributes: { "data-id" : dirs[index].id },
-			'text': dirs[index].text + ' ' + dirs[index].pool
-		});
+		// children.push({
+		// 	attributes: { href : dirs[index].id },
+		// 	'text': dirs[index].text + ' ' + dirs[index].pool
+		// });
+
+		data.push(
+			{
+				{attributes: { href: dirs[index].id } },
+				'text': dirs[index].text + ' ' + dirs[index].pool,
+				'state': {
+					'selected' : false
+				}
+				children:[]
+			}
+		);
+
 	}
+
+
+	// data  : {
+	//     type  : "json",
+	//     json  : [ 
+	//       { attributes: { id : "pjson_1" }, state: "open", data: "Root node 1", children : [
+	//         { attributes: { id : "pjson_2" }, data: { title : "Custom icon", icon : "../media/images/ok.png" } },
+	//         { attributes: { id : "pjson_3" }, data: "Child node 2" },
+	//         { attributes: { id : "pjson_4" }, data: "Some other child node" }
+	//       ]}, 
+	//       { attributes: { id : "pjson_5" }, data: "Root node 2" } 
+	//     ]
+	//   }
 
 	$('#tree_view').jstree('destroy');
 
+	// $('#tree_view').jstree({
+	// 	'core' : {
+
+	// 	    'data' : [
+	// 			{
+	// 				'text' : 'Root',
+	// 				'state' : {
+	// 					'opened' : true,
+	// 					'selected' : true
+	// 				},
+	// 				'children' : children
+	// 			}
+	// 	    ],
+	// 	    "themes" : { "theme": "default" },
+	// 	    "plugins" : [ "themes", "ui" ]
+	// 	}
+ // 	});
 	$('#tree_view').jstree({
 		'core' : {
-		    'data' : [
-				{
-					'text' : 'Root',
-					'state' : {
-						'opened' : true,
-						'selected' : true
-					},
-					'children' : children
-				}
-		    ],
+		    'data' : data,
 		    "themes" : { "theme": "default" },
 		    "plugins" : [ "themes", "ui" ]
 		}
