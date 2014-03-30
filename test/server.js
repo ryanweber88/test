@@ -31,6 +31,16 @@ app.get('/api/dirs', function(req, res) {
 	});
 });
 
+app.get('/api/start', function(req, res) {
+
+	Directory.find(function(err, dirs) {
+		if (err) { res.send(err); }
+		res.json(dirs);
+		io.sockets.emit('client_console', { dirs: dirs });
+	});
+
+});
+
 
 app.post('/api/dirs', function(req, res) {
 

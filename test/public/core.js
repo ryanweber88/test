@@ -43,6 +43,42 @@ function mainController($scope, $http) {
 			console.log('Error: ' + data);
 		});
 
+	// Get all directories and show tree
+	$http.get('/api/start')
+		.success(function(data) {
+			var children = [];
+
+			for ( index in data ) {
+				children.push({
+					'text': data[index].text + ' ' + data[index].pool
+				});
+			}
+
+			console.log('tree start');
+
+			$('#tree_view').jstree('destroy');
+
+			$('#tree_view').jstree({
+				'core' : {
+				    'data' : [
+						{
+							'text' : 'Root',
+							'state' : {
+								'opened' : true,
+								'selected' : true
+							},
+							'children' : children
+						}
+				    ],
+				    "themes" : { "theme": "default" },
+				    "plugins" : [ "themes", "ui" ]
+				}
+		 	});
+		})
+		.error(function(data) {
+			console.log('Error: ' + data);
+		});
+
 	// when submitting the add form, send the text to the node API
 	$scope.createDir = function() {
 		$http.post('/api/dirs', $scope.formData)
@@ -57,29 +93,15 @@ function mainController($scope, $http) {
 	};
 
 	$scope.createParentNode = function() {
-		// $scope.formData.lowerBound = 30;
-		// $scope.formData.upperBound = 200;
-
 		$http.post('/api/nodes', $scope.formData)
 			.success(function(data) {
 				$scope.formData = {}; // clear the form so our user is ready to enter another
 				$scope.dirs = data;
 				console.log(data);
 
-				// $$hashKey: "006"
-				// __v: 0
-				// _id: "53387381d08a8c7b6a000002"
-				// hierarchy: 2
-				// pool: "(200 - 30)"
-				// text: "FIRST"
-
 				var children = [];
 
 				for ( index in data ) {
-					// var random_lower = Math.floor((Math.random() * 1000) + 1);
-					// var random_upper = Math.floor((Math.random() * (1000 - random_lower + 1) ) + random_lower)
-					// console.log('lower' + random_lower);
-					// console.log('upper' + random_upper);
 					children.push({
 						'text': data[index].text + ' ' + data[index].pool
 					});
@@ -105,11 +127,6 @@ function mainController($scope, $http) {
 					    "plugins" : [ "themes", "ui" ]
 					}
 			 	});
-
-
-
-
-
 
 			})
 			.error(function(data) {
