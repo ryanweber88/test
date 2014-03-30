@@ -37,6 +37,9 @@ socket.on('new_dirs', function(data) {
 function rewriteDirs(data) {
 	var children = [];
 
+	console.log('rewrite data?');
+	console.log(data);
+
 	for ( index in data ) {
 		children.push({
 			'text': data[index].text + ' ' + data[index].pool
