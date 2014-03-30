@@ -18,8 +18,6 @@ socket.on('test', function(data) {
 socket.on('error', function() { console.error(arguments) });
 socket.on('message', function() { console.log(arguments) });
 
-//io.sockets.emit('added', { msg: 'added post' });
-
 socket.on('added', function(data) {
 	console.log(data);
 });
@@ -73,24 +71,25 @@ function mainController($scope, $http) {
 }
 
 $(document).ready(function(){
-    $('#tree_view').jstree({ 'core' : {
-    'data' : [
-		{
-			'text' : 'Root',
-			'state' : {
-				'opened' : true,
-				'selected' : true
-			},
-			'children' : [
-				{ 'text' : 'Child 1' },
-				{ 'text' : 'Child 2' },
+    $('#tree_view').jstree({
+		'core' : {
+		    'data' : [
+				{
+					'text' : 'Root',
+					'state' : {
+						'opened' : true,
+						'selected' : true
+					},
+					'children' : [
+						{ 'text' : 'Child 1' },
+						{ 'text' : 'Child 2' },
 
-			]
+					]
+				}
+		    ],
+		    "themes" : { "theme": "default" },
+		    "plugins" : [ "themes", "ui" ]
 		}
-    ],
-    "themes" : { "theme": "default" },
-    "plugins" : [ "themes", "ui" ]
-} });
-
+ 	});
 });
 

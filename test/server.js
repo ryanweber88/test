@@ -14,30 +14,11 @@ app.configure(function() {
 	app.use(express.methodOverride()); 						// simulate DELETE and PUT
 });
 
-// function sendTime() {
-//     io.sockets.emit('time', { time: new Date().toJSON() });
-// }
-
-// function sendTest() {
-//     io.sockets.emit('test', { test: "this is a test" });
-// }
-
-// setInterval(sendTime, 10000);
-
-//setInterval(sendTest, 3000);
-
-// Emit welcome message on connection
-io.sockets.on('connection', function(socket) {
-    socket.emit('welcome', { message: 'Welcome!' });
-
-    socket.on('i am client', console.log);
-});
-
-
-
+// Directory model construct
 var Directory = mongoose.model('Directory', {
 	text : String,
-	hierarchy : Number
+	hierarchy : Number,
+	pool : String
 });
 
 
@@ -52,6 +33,8 @@ app.get('/api/dirs', function(req, res) {
 
 
 app.post('/api/dirs', function(req, res) {
+
+	io.sockets.emit('client_console', { req: req });
 
 	// create a todo, information comes from AJAX request from Angular
 	Directory.create({
@@ -71,6 +54,9 @@ app.post('/api/dirs', function(req, res) {
 });
 
 app.delete('/api/dirs/:dir_id', function(req, res) {
+
+	io.sockets.emit('client_console', { req: req });
+
 	Directory.remove({
 		_id : req.params.dir_id
 	}, function(err, dir) {
