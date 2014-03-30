@@ -1,6 +1,7 @@
 var scotchTodo = angular.module('testDirectory', []);
 
-var socket = io.connect('//localhost:3000');
+
+var socket = io.connect('//localhost:8080');
 
 socket.on('welcome', function(data) {
     $('#messages').append('<li>' + data.message + '</li>');
@@ -13,8 +14,6 @@ socket.on('time', function(data) {
 });
 socket.on('error', function() { console.error(arguments) });
 socket.on('message', function() { console.log(arguments) });
-
-
 
 function mainController($scope, $http) {
 	$scope.formData = {};
