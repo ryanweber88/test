@@ -198,14 +198,15 @@ $(document).ready(function(){
 	            		console.log('remove node');
 	            		console.log($(this).attr('href'));
 	            		//console.log('dir id - ' + dir_id);
-	            		$http.delete('/api/dirs/' + id_to_remove)
-							.success(function(data) {
-								$scope.dirs = data;
-								rewriteDirs(data);
-							})
-							.error(function(data) {
-								console.log('Error: ' + data);
-							});
+	      //       		$http.delete('/api/dirs/' + id_to_remove)
+							// .success(function(data) {
+							// 	$scope.dirs = data;
+							// 	rewriteDirs(data);
+							// })
+							// .error(function(data) {
+							// 	console.log('Error: ' + data);
+							// });
+	    				$scope.deleteDir(id_to_remove);
 	            		break;
 	            	default:
 	            		console.log('nil');
