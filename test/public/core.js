@@ -151,7 +151,7 @@ function mainController($scope, $http) {
 		$http.delete('/api/dirs/' + id)
 			.success(function(data) {
 				$scope.dirs = data;
-				// console.log(data);
+				console.log('deleted');
 			})
 			.error(function(data) {
 				console.log('Error: ' + data);
