@@ -249,7 +249,8 @@ $(document).ready(function(){
 	        selector: '.jstree-anchor', 
 	        callback: function(key, options) {
 	            var m = "clicked: " + key;
-	            window.console && console.log(m) || alert(m);
+	            console.log(m);
+	            // window.console && console.log(m) || alert(m);
 
 	            switch ( key ) {
 	            	case 'generate_randoms':
@@ -264,12 +265,6 @@ $(document).ready(function(){
 	            "quit": {name: "Quit", icon: "quit"}
 	        }
 	    });
-	    
-	    // $('.context-menu-item').on('click', function(e){
-	    //     console.log('clicked', this);
-
-	    //     switch (this.)
-	    // });
 	});
 
 });
