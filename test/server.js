@@ -57,11 +57,14 @@ app.post('/api/nodes', function(req, res) {
 
 	io.sockets.emit('client_console', { request_body: req.body });
 
+	var random_lower = Math.floor((Math.random() * 1000) + 1);
+	var random_upper = Math.floor((Math.random() * (1000 - random_lower + 1) ) + random_lower)
+
 	// create a todo, information comes from AJAX request from Angular
 	Directory.create({
 		text : req.body.text,
 		hierarchy : 2,
-		pool : '(' + req.body.lowerBound + ' - ' + req.body.upperBound + ')',
+		pool : '(' + random_lower + ' - ' + random_upper + ')',
 		done : false
 	}, function(err, todo) {
 		if (err){ res.send(err); }

@@ -57,8 +57,8 @@ function mainController($scope, $http) {
 	};
 
 	$scope.createParentNode = function() {
-		$scope.formData.lowerBound = 30;
-		$scope.formData.upperBound = 200;
+		// $scope.formData.lowerBound = 30;
+		// $scope.formData.upperBound = 200;
 
 		$http.post('/api/nodes', $scope.formData)
 			.success(function(data) {
@@ -76,8 +76,10 @@ function mainController($scope, $http) {
 				var children = [];
 
 				for ( index in data ) {
-					var random_lower = Math.floor(Math.random() * 1000);
-					console.log('lower' + random_lower);
+					// var random_lower = Math.floor((Math.random() * 1000) + 1);
+					// var random_upper = Math.floor((Math.random() * (1000 - random_lower + 1) ) + random_lower)
+					// console.log('lower' + random_lower);
+					// console.log('upper' + random_upper);
 					children.push({
 						'text': data[index].text + ' ' + data[index].pool
 					});
