@@ -19,13 +19,12 @@ function sendTime() {
 }
 
 function sendTest() {
-    io.sockets.emit('test', { test: 'this is a test' });
+    io.sockets.emit('test', { test: "this is a test" });
 }
 
-// Send current time every 10 secs
 setTimeout(sendTime, 10000);
 
-sendTest();
+setTimeout(sendTest, 3000);
 
 // Emit welcome message on connection
 io.sockets.on('connection', function(socket) {
