@@ -65,6 +65,7 @@ app.post('/api/dirs', function(req, res) {
 			if (err) { res.send(err); }
 			res.json(dirs);
 			io.sockets.emit('added', { msg: 'added post' });
+			console.log(dirs);
 		});
 	});
 });

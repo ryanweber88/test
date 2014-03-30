@@ -71,16 +71,16 @@ function mainController($scope, $http) {
 $(document).ready(function(){
     $('#tree_view').jstree({ 'core' : {
     'data' : [
-		'Simple root node',
 		{
-			'text' : 'Root node 2',
+			'text' : 'Root',
 			'state' : {
 				'opened' : true,
 				'selected' : true
 			},
 			'children' : [
 				{ 'text' : 'Child 1' },
-				'Child 2'
+				{ 'text' : 'Child 2' },
+
 			]
 		}
     ],
