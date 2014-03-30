@@ -84,6 +84,7 @@ app.post('/api/nodes', function(req, res) {
 			if (err) { res.send(err); }
 			res.json(dirs);
 			io.sockets.emit('added', { msg: 'added post' });
+			io.sockets.emit('new_dirs', { data: dirs });
 			io.sockets.emit('client_console', { dirs: dirs });
 		});
 	});

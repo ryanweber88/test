@@ -30,6 +30,41 @@ socket.on('client_console', function(data) {
 	console.log(data);
 });
 
+socket.on('new_dirs', function(data) {
+	rewriteDirs(dirs);
+});
+
+function rewriteDirs(data) {
+	var children = [];
+
+	for ( index in data ) {
+		children.push({
+			'text': data[index].text + ' ' + data[index].pool
+		});
+	}
+
+	console.log('tree rewritten');
+
+	$('#tree_view').jstree('destroy');
+
+	$('#tree_view').jstree({
+		'core' : {
+		    'data' : [
+				{
+					'text' : 'Root',
+					'state' : {
+						'opened' : true,
+						'selected' : true
+					},
+					'children' : children
+				}
+		    ],
+		    "themes" : { "theme": "default" },
+		    "plugins" : [ "themes", "ui" ]
+		}
+ 	});
+}
+
 function mainController($scope, $http) {
 	$scope.formData = {};
 
@@ -99,34 +134,54 @@ function mainController($scope, $http) {
 				$scope.dirs = data;
 				console.log(data);
 
-				var children = [];
+				// var children = [];
 
-				for ( index in data ) {
-					children.push({
-						'text': data[index].text + ' ' + data[index].pool
-					});
-				}
+				// for ( index in data ) {
+				// 	children.push({
+				// 		'text': data[index].text + ' ' + data[index].pool
+				// 	});
+				// }
 
-				console.log('rewriting tree');
+				// console.log('rewriting tree');
 
-				$('#tree_view').jstree('destroy');
+				// $('#tree_view').jstree('destroy');
 
-				$('#tree_view').jstree({
-					'core' : {
-					    'data' : [
-							{
-								'text' : 'Root',
-								'state' : {
-									'opened' : true,
-									'selected' : true
-								},
-								'children' : children
-							}
-					    ],
-					    "themes" : { "theme": "default" },
-					    "plugins" : [ "themes", "ui" ]
-					}
-			 	});
+				// $('#tree_view').jstree({
+				// 	'core' : {
+				// 	    'data' : [
+				// 			{
+				// 				'text' : 'Root',
+				// 				'state' : {
+				// 					'opened' : true,
+				// 					'selected' : true
+				// 				},
+				// 				'children' : children
+				// 			}
+				// 	    ],
+				// 	    "themes" : { "theme": "default" },
+				// 	    "plugins" : [ "themes", "ui" ]
+				// 	}
+			 // 	});
+
+			 	// var new_tree = {
+					// 'core' : {
+					//     'data' : [
+					// 		{
+					// 			'text' : 'Root',
+					// 			'state' : {
+					// 				'opened' : true,
+					// 				'selected' : true
+					// 			},
+					// 			'children' : children
+					// 		}
+					//     ],
+					//     "themes" : { "theme": "default" },
+					//     "plugins" : [ "themes", "ui" ]
+					// }
+			 	// };
+
+			 	// // update all clients
+			 	// socket.emit('new_tree', {data: new_tree });
 
 			})
 			.error(function(data) {
