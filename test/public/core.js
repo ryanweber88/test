@@ -46,9 +46,9 @@ function rewriteDirs(dirs) {
 
 		data.push({
 			'a_attr': {
-				'href': dirs[index].id
+				'href': dirs[index]._id
 			},
-			'id': dirs[index].id,
+			'id': dirs[index]._id,
 			'text': dirs[index].text + ' ' + dirs[index].pool,
 			'state': {
 				'selected' : false
