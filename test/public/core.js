@@ -239,8 +239,6 @@ $(document).ready(function(){
 	            		console.log('generating randoms');
 	            	case 'remove_node':
 	            		console.log('remove node');
-	            	default:
-	            		console.log('nothing to do');
 	            }
 	        },
 	        items: {
