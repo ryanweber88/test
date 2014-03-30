@@ -61,7 +61,7 @@ app.post('/api/nodes', function(req, res) {
 	Directory.create({
 		text : req.body.text,
 		hierarchy : 2,
-		pool : '(' + req.body.upperBound + ' - ' + req.body.lowerBound + ')',
+		pool : '(' + req.body.lowerBound + ' - ' + req.body.upperBound + ')',
 		done : false
 	}, function(err, todo) {
 		if (err){ res.send(err); }

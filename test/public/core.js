@@ -65,6 +65,45 @@ function mainController($scope, $http) {
 				$scope.formData = {}; // clear the form so our user is ready to enter another
 				$scope.dirs = data;
 				console.log(data);
+
+				// $$hashKey: "006"
+				// __v: 0
+				// _id: "53387381d08a8c7b6a000002"
+				// hierarchy: 2
+				// pool: "(200 - 30)"
+				// text: "FIRST"
+
+				var children = [];
+
+				for ( dir in data ) {
+					children.push({
+						'text': dir.text + ' ' + dir.pool
+					});
+				}
+
+
+				$('#tree_view').jstree({
+					'core' : {
+					    'data' : [
+							{
+								'text' : 'Root',
+								'state' : {
+									'opened' : true,
+									'selected' : true
+								},
+								'children' : children
+							}
+					    ],
+					    "themes" : { "theme": "default" },
+					    "plugins" : [ "themes", "ui" ]
+					}
+			 	});
+
+
+
+
+
+
 			})
 			.error(function(data) {
 				console.log('Error: ' + data);
