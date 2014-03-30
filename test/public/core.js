@@ -73,14 +73,24 @@ $(document).ready(function(){
         "json_data" : {
             "data":[
                 {
-                    "data" : "Search engines"
+                    "data" : "Search engines",
+                    "children" :[
+                                 {"data":"Yahoo"},
+                                 {"data":"Bing"},
+                                 {"data":"Google", "children":[{"data":"Youtube"},{"data":"Gmail"},{"data":"Orkut"}]}
+                                ]
                 },
                 {
-                    "data" : "Networking sites"
+                    "data" : "Networking sites",
+                    "children" :[
+                        {"data":"Facebook"},
+                        {"data":"Twitter"}
+                    ]
                 }
             ]
         },
         "plugins" : [ "themes", "json_data", "ui" ]
     });
+
 });
 
