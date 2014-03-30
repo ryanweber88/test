@@ -80,35 +80,6 @@ function mainController($scope, $http) {
 	$http.get('/api/start')
 		.success(function(data) {
 			rewriteDirs(data);
-
-			// var children = [];
-
-			// for ( index in data ) {
-			// 	children.push({
-			// 		'text': data[index].text + ' ' + data[index].pool
-			// 	});
-			// }
-
-			// console.log('tree start');
-
-			// $('#tree_view').jstree('destroy');
-
-			// $('#tree_view').jstree({
-			// 	'core' : {
-			// 	    'data' : [
-			// 			{
-			// 				'text' : 'Root',
-			// 				'state' : {
-			// 					'opened' : true,
-			// 					'selected' : true
-			// 				},
-			// 				'children' : children
-			// 			}
-			// 	    ],
-			// 	    "themes" : { "theme": "default" },
-			// 	    "plugins" : [ "themes", "ui" ]
-			// 	}
-		 // 	});
 		})
 		.error(function(data) {
 			console.log('Error: ' + data);
@@ -133,56 +104,6 @@ function mainController($scope, $http) {
 				$scope.formData = {}; // clear the form so our user is ready to enter another
 				$scope.dirs = data;
 				console.log(data);
-
-				// var children = [];
-
-				// for ( index in data ) {
-				// 	children.push({
-				// 		'text': data[index].text + ' ' + data[index].pool
-				// 	});
-				// }
-
-				// console.log('rewriting tree');
-
-				// $('#tree_view').jstree('destroy');
-
-				// $('#tree_view').jstree({
-				// 	'core' : {
-				// 	    'data' : [
-				// 			{
-				// 				'text' : 'Root',
-				// 				'state' : {
-				// 					'opened' : true,
-				// 					'selected' : true
-				// 				},
-				// 				'children' : children
-				// 			}
-				// 	    ],
-				// 	    "themes" : { "theme": "default" },
-				// 	    "plugins" : [ "themes", "ui" ]
-				// 	}
-			 // 	});
-
-			 	// var new_tree = {
-					// 'core' : {
-					//     'data' : [
-					// 		{
-					// 			'text' : 'Root',
-					// 			'state' : {
-					// 				'opened' : true,
-					// 				'selected' : true
-					// 			},
-					// 			'children' : children
-					// 		}
-					//     ],
-					//     "themes" : { "theme": "default" },
-					//     "plugins" : [ "themes", "ui" ]
-					// }
-			 	// };
-
-			 	// // update all clients
-			 	// socket.emit('new_tree', {data: new_tree });
-
 			})
 			.error(function(data) {
 				console.log('Error: ' + data);
@@ -231,10 +152,8 @@ $(document).ready(function(){
 	    $.contextMenu({
 	        selector: '.jstree-anchor', 
 	        callback: function(key, options) {
-	            // var m = "clicked: " + key;
-	            // console.log(m);
 
-	            console.log('key - ' + key);
+	            // console.log('key - ' + key);
 
 	            switch ( key ) {
 	            	case 'generate_randoms':
@@ -242,6 +161,16 @@ $(document).ready(function(){
 	            		break;
 	            	case 'remove_node':
 	            		console.log('remove node');
+	            		console.log($(this).attr('href'));
+	            		//console.log('dir id - ' + dir_id);
+	      //       		$http.delete('/api/dirs/' + id)
+							// .success(function(data) {
+							// 	$scope.dirs = data;
+							// 	// console.log(data);
+							// })
+							// .error(function(data) {
+							// 	console.log('Error: ' + data);
+							// });
 	            		break;
 	            	default:
 	            		console.log('nil');
