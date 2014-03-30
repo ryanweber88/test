@@ -39,6 +39,7 @@ function rewriteDirs(dirs) {
 
 	for ( index in dirs ) {
 		children.push({
+			attributes: { "data-id" : dirs[index].id },
 			'text': dirs[index].text + ' ' + dirs[index].pool
 		});
 	}
