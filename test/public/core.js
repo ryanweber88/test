@@ -249,22 +249,27 @@ $(document).ready(function(){
 	        selector: '.jstree-anchor', 
 	        callback: function(key, options) {
 	            var m = "clicked: " + key;
-	            window.console && console.log(m) || alert(m); 
+	            window.console && console.log(m) || alert(m);
+
+	            switch ( key ) {
+	            	case 'generate_randoms':
+	            		console.log('generating randoms');
+	            	default:
+	            		console.log('nothing to do');
+	            }
 	        },
 	        items: {
-	            "edit": {name: "Edit", icon: "edit"},
-	            "cut": {name: "Cut", icon: "cut"},
-	            "copy": {name: "Copy", icon: "copy"},
-	            "paste": {name: "Paste", icon: "paste"},
-	            "delete": {name: "Delete", icon: "delete"},
+	            "generate_randoms": {name: "Generate Numbers", icon: "edit"},
 	            "sep1": "---------",
 	            "quit": {name: "Quit", icon: "quit"}
 	        }
 	    });
 	    
-	    $('.context-menu-item').on('click', function(e){
-	        console.log('clicked', this);
-	    })
+	    // $('.context-menu-item').on('click', function(e){
+	    //     console.log('clicked', this);
+
+	    //     switch (this.)
+	    // });
 	});
 
 });
