@@ -45,7 +45,7 @@ function rewriteDirs(dirs) {
 		// });
 
 		data.push({
-			attributes: { href: dirs[index].id },
+			'a_attr': { 'href': dirs[index].id },
 			'text': dirs[index].text + ' ' + dirs[index].pool,
 			'state': {
 				'selected' : false
