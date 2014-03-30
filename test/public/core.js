@@ -84,7 +84,7 @@ $(document).ready(function(){
 			]
 		}
     ],
-    "themes" : [ "theme": "default" ],
+    "themes" : { "theme": "default" },
     "plugins" : [ "themes", "ui" ]
 } });
 
