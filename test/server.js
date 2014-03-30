@@ -53,6 +53,29 @@ app.post('/api/dirs', function(req, res) {
 	});
 });
 
+app.post('/api/nodes', function(req, res) {
+
+	io.sockets.emit('client_console', { request_body: req.body });
+
+	// create a todo, information comes from AJAX request from Angular
+	Directory.create({
+		text : req.body.text,
+		hierarchy : 2,
+		pool : '(' + res.body.upperBound + ' - ' + res.body.lowerBound + ')'
+		done : false
+	}, function(err, todo) {
+		if (err){ res.send(err); }
+
+		// get and return all the todos after you create another
+		Directory.find(function(err, dirs) {
+			if (err) { res.send(err); }
+			res.json(dirs);
+			io.sockets.emit('added', { msg: 'added post' });
+			io.sockets.emit('client_console', { dirs: dirs });
+		});
+	});
+});
+
 app.delete('/api/dirs/:dir_id', function(req, res) {
 
 	io.sockets.emit('client_console', { request_body: req.body });

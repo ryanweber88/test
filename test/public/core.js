@@ -56,6 +56,21 @@ function mainController($scope, $http) {
 			});
 	};
 
+	$scope.createParentNode = function() {
+		$scope.formData.lowerBound = 30;
+		$scope.formData.upperBound = 200;
+
+		$http.post('/api/nodes', $scope.formData)
+			.success(function(data) {
+				$scope.formData = {}; // clear the form so our user is ready to enter another
+				$scope.dirs = data;
+				console.log(data);
+			})
+			.error(function(data) {
+				console.log('Error: ' + data);
+			});
+	};
+
 	// delete a dir after checking it
 	$scope.deleteDir = function(id) {
 		$http.delete('/api/dirs/' + id)
