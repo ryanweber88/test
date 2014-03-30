@@ -28,6 +28,10 @@ socket.on('removed', function(data) {
 	console.log(data);
 });
 
+socket.on('client_console', function(data) {
+	console.log(data);
+});
+
 function mainController($scope, $http) {
 	$scope.formData = {};
 
