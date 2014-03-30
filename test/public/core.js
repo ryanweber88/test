@@ -227,42 +227,27 @@ $(document).ready(function(){
 		}
  	});
 
- 	// Right click for dirs
- // 	$('.jstree-anchor').on('contextmenu', function(e) {
- // 		e.stopPropagation();
-	//     console.log('right clicked!');
-	// });
-
-	// $('.jstree-anchor').on('mousedown', function(e) {
-	// 	e.preventDefault();
-	// 	switch (e.which) {
-	//         case 3:
-	//             console.log('right click');
-	//             break;
-	//         default:
-	//             console.log('lol');
- //    	}
-	// });
-
 	$(function(){
 	    $.contextMenu({
 	        selector: '.jstree-anchor', 
 	        callback: function(key, options) {
-	            var m = "clicked: " + key;
-	            console.log(m);
-	            // window.console && console.log(m) || alert(m);
+	            // var m = "clicked: " + key;
+	            // console.log(m);
 
 	            switch ( key ) {
 	            	case 'generate_randoms':
 	            		console.log('generating randoms');
+	            	case 'remove_node':
+	            		console.log('remove node');
 	            	default:
 	            		console.log('nothing to do');
 	            }
 	        },
 	        items: {
-	            "generate_randoms": {name: "Generate Numbers", icon: "edit"},
+	            "generate_randoms": {name: "Generate Numbers"},
+	            "remove_node": {name: "Remove Node"},
 	            "sep1": "---------",
-	            "quit": {name: "Quit", icon: "quit"}
+	            "quit": {name: "Quit"}
 	        }
 	    });
 	});
