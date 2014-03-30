@@ -12,6 +12,9 @@ socket.on('time', function(data) {
     console.log(data);
     $('#messages').html('<li>' + data.time + '</li>');
 });
+socket.on('test', function(data) {
+    console.log(data);
+});
 socket.on('error', function() { console.error(arguments) });
 socket.on('message', function() { console.log(arguments) });
 
