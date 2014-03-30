@@ -29,6 +29,7 @@
 <body ng-controller="mainController">
 	<div class="container">
 
+		<!--
 		<div id='messages'></div>
 
 		<div class="jumbotron text-center">
@@ -38,7 +39,6 @@
 		<div id="dir-list" class="row">
 			<div class="col-sm-4 col-sm-offset-4">
 
-				<!-- LOOP OVER THE TODOS IN $scope.todos -->
 				<div class="checkbox" ng-repeat="dir in dirs">
 					<label>
 						<input type="checkbox" ng-click="deleteDir(dir._id)"> {{ dir.text }}
@@ -47,17 +47,14 @@
 
 			</div>
 		</div>
+		-->
 
 		<div id="dir-form" class="row">
 			<div class="col-sm-8 col-sm-offset-2 text-center">
 				<form>
 					<div class="form-group">
-
-						<!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
 						<input type="text" class="form-control input-lg text-center" placeholder="New parent node name" ng-model="formData.text">
 					</div>
-
-					<!-- createToDo() WILL CREATE NEW TODOS -->
 					<button type="submit" class="btn btn-primary btn-lg" ng-click="createParentNode()">Add</button>
 				</form>
 			</div>
