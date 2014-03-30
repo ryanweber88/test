@@ -83,7 +83,9 @@ $(document).ready(function(){
 				'Child 2'
 			]
 		}
-    ]
+    ],
+    "themes" : [ "theme": "default" ],
+    "plugins" : [ "themes", "ui" ]
 } });
 
 });
