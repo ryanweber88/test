@@ -34,7 +34,7 @@ app.get('/api/dirs', function(req, res) {
 
 app.post('/api/dirs', function(req, res) {
 
-	io.sockets.emit('client_console', { req: req });
+	io.sockets.emit('client_console', { request: req });
 
 	// create a todo, information comes from AJAX request from Angular
 	Directory.create({
@@ -55,7 +55,7 @@ app.post('/api/dirs', function(req, res) {
 
 app.delete('/api/dirs/:dir_id', function(req, res) {
 
-	io.sockets.emit('client_console', { req: req });
+	io.sockets.emit('client_console', { request: req });
 
 	Directory.remove({
 		_id : req.params.dir_id
