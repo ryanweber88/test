@@ -4,13 +4,13 @@ var scotchTodo = angular.module('testDirectory', []);
 var socket = io.connect('http://50.112.173.66:8080');
 
 socket.on('welcome', function(data) {
-    $('#messages').append('<li>' + data.message + '</li>');
+    $('#messages').html('<li>' + data.message + '</li>');
 
     socket.emit('i am client', {data: 'foo!'});
 });
 socket.on('time', function(data) {
     console.log(data);
-    $('#messages').append('<li>' + data.time + '</li>');
+    $('#messages').html('<li>' + data.time + '</li>');
 });
 socket.on('error', function() { console.error(arguments) });
 socket.on('message', function() { console.log(arguments) });
