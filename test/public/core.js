@@ -67,3 +67,20 @@ function mainController($scope, $http) {
 	};
 
 }
+
+$(document).ready(function(){
+    $("#tree_view").jstree({
+        "json_data" : {
+            "data":[
+                {
+                    "data" : "Search engines"
+                },
+                {
+                    "data" : "Networking sites"
+                }
+            ]
+        },
+        "plugins" : [ "themes", "json_data", "ui" ]
+    });
+});
+
