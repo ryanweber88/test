@@ -14,15 +14,15 @@ app.configure(function() {
 	app.use(express.methodOverride()); 						// simulate DELETE and PUT
 });
 
-function sendTime() {
-    io.sockets.emit('time', { time: new Date().toJSON() });
-}
+// function sendTime() {
+//     io.sockets.emit('time', { time: new Date().toJSON() });
+// }
 
 // function sendTest() {
 //     io.sockets.emit('test', { test: "this is a test" });
 // }
 
-setInterval(sendTime, 10000);
+// setInterval(sendTime, 10000);
 
 //setInterval(sendTest, 3000);
 
