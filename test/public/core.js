@@ -41,6 +41,10 @@ function rewriteDirs(data) {
 	console.log(data);
 
 	for ( index in data ) {
+		console.log('index - ' + index);
+		console.log('data in - ');
+		console.log(data[index]);
+
 		children.push({
 			'text': data[index].text + ' ' + data[index].pool
 		});
