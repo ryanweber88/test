@@ -228,7 +228,7 @@ $(document).ready(function(){
  	});
 
  	// Right click for dirs
- 	$('.jstree-anchor').on('contextmenu', function(e) {
+ 	$('.jstree-anchor').live('contextmenu', function(e) {
 	    console.log('right clicked!');
 	});
 });
