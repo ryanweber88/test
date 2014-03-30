@@ -48,7 +48,6 @@ function rewriteDirs(dirs) {
 			'a_attr': {
 				'href': dirs[index]._id
 			},
-			// 'id': dirs[index]._id,
 			'text': dirs[index].text + ' ' + dirs[index].pool,
 			'state': {
 				'selected' : false
@@ -59,37 +58,8 @@ function rewriteDirs(dirs) {
 	}
 
 
-	// data  : {
-	//     type  : "json",
-	//     json  : [ 
-	//       { attributes: { id : "pjson_1" }, state: "open", data: "Root node 1", children : [
-	//         { attributes: { id : "pjson_2" }, data: { title : "Custom icon", icon : "../media/images/ok.png" } },
-	//         { attributes: { id : "pjson_3" }, data: "Child node 2" },
-	//         { attributes: { id : "pjson_4" }, data: "Some other child node" }
-	//       ]}, 
-	//       { attributes: { id : "pjson_5" }, data: "Root node 2" } 
-	//     ]
-	//   }
-
 	$('#tree_view').jstree('destroy');
 
-	// $('#tree_view').jstree({
-	// 	'core' : {
-
-	// 	    'data' : [
-	// 			{
-	// 				'text' : 'Root',
-	// 				'state' : {
-	// 					'opened' : true,
-	// 					'selected' : true
-	// 				},
-	// 				'children' : children
-	// 			}
-	// 	    ],
-	// 	    "themes" : { "theme": "default" },
-	// 	    "plugins" : [ "themes", "ui" ]
-	// 	}
- // 	});
 	$('#tree_view').jstree({
 		'core' : {
 		    'data' : data,
@@ -146,6 +116,18 @@ function mainController($scope, $http) {
 			});
 	};
 
+	$scope.createChildren = function() {
+		$http.post('/api/children', $scope.formData)
+			.success(function(data) {
+				$scope.formData = {}; // clear the form so our user is ready to enter another
+				$scope.dirs = data;
+				console.log(data);
+			})
+			.error(function(data) {
+				console.log('Error: ' + data);
+			});
+	};
+
 	// delete a dir after checking it
 	$scope.deleteDir = function(id) {
 		$http.delete('/api/dirs/' + id)
@@ -158,9 +140,6 @@ function mainController($scope, $http) {
 				console.log('Error: ' + data);
 			});
 	};
-
-
-
 
 
 
@@ -198,32 +177,12 @@ function mainController($scope, $http) {
 	            	case 'remove_node':
 	            		var id_to_remove = $(this).attr('href');
 	            		console.log('removing node');
-	            		// console.log($(this).attr('href'));
-	            		//console.log('dir id - ' + dir_id);
-	      //       		$http.delete('/api/dirs/' + id_to_remove)
-							// .success(function(data) {
-							// 	$scope.dirs = data;
-							// 	rewriteDirs(data);
-							// })
-							// .error(function(data) {
-							// 	console.log('Error: ' + data);
-							// });
 	    				$scope.deleteDir(id_to_remove);
-	    	// 			$.post('/api/dirs/' + id_to_remove, function (response) {
-						// 	console.log(response);
-						// });
 	            		break;
 	            	default:
 	            		console.log('nil');
 	            }
 	        },
-	        events: {
-				show: function(opt) {
-					var id_to_remove = $(this).attr('href');
-					//opt.$menu.find('.context-menu-item > span').attr('data-remove', id_to_remove);
-					//opt.$menu.find('.context-menu-item > span').attr('ng-click', 'deleteDir(' + id_to_remove + ')');
-				}
-			},
 	        items: {
 	            "generate_randoms": {name: "Generate Numbers"},
 	            "remove_node": {name: "Remove Node"},
@@ -235,82 +194,4 @@ function mainController($scope, $http) {
 
 
 
-
-
-
-
 }
-
-$(document).ready(function(){
-
-	// // Setup jstree
- //    $('#tree_view').jstree({
-	// 	'core' : {
-	// 	    'data' : [
-	// 			{
-	// 				'text' : 'Root',
-	// 				'state' : {
-	// 					'opened' : true,
-	// 					'selected' : true
-	// 				},
-	// 				'children' : [
-	// 					{ 'text' : 'Child 1' },
-	// 					{ 'text' : 'Child 2' },
-
-	// 				]
-	// 			}
-	// 	    ],
-	// 	    "themes" : { "theme": "default" },
-	// 	    "plugins" : [ "themes", "ui" ]
-	// 	}
- // 	});
-
-	// $(function(){
-	//     $.contextMenu({
-	//         selector: '.jstree-anchor', 
-	//         callback: function(key, options) {
-
-	//             switch ( key ) {
-	//             	case 'generate_randoms':
-	//             		console.log('generating randoms');
-	//             		break;
-	//             	case 'remove_node':
-	//             		// var id_to_remove = $(this).attr('href');
-	//             		console.log('removed node');
-	//             		// console.log($(this).attr('href'));
-	//             		//console.log('dir id - ' + dir_id);
-	//       //       		$http.delete('/api/dirs/' + id_to_remove)
-	// 						// .success(function(data) {
-	// 						// 	$scope.dirs = data;
-	// 						// 	rewriteDirs(data);
-	// 						// })
-	// 						// .error(function(data) {
-	// 						// 	console.log('Error: ' + data);
-	// 						// });
-	//     				// $scope.deleteDir(id_to_remove);
-	//     				$.post('/api/dirs/' + id_to_remove, function (response) {
-	// 						console.log(response);
-	// 					});
-	//             		break;
-	//             	default:
-	//             		console.log('nil');
-	//             }
-	//         },
-	//         events: {
-	// 			show: function(opt) {
-	// 				var id_to_remove = $(this).attr('href');
-	// 				//opt.$menu.find('.context-menu-item > span').attr('data-remove', id_to_remove);
-	// 				opt.$menu.find('.context-menu-item > span').attr('ng-click', 'deleteDir(' + id_to_remove + ')');
-	// 			}
-	// 		},
-	//         items: {
-	//             "generate_randoms": {name: "Generate Numbers"},
-	//             "remove_node": {name: "Remove Node"},
-	//             "sep1": "---------",
-	//             "quit": {name: "Quit"}
-	//         }
-	//     });
-	// });
-
-});
-

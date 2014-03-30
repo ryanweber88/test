@@ -73,8 +73,35 @@ app.post('/api/nodes', function(req, res) {
 	// create a todo, information comes from AJAX request from Angular
 	Directory.create({
 		text : req.body.text,
-		hierarchy : 2,
+		hierarchy : 1,
 		pool : '(' + random_lower + ' - ' + random_upper + ')',
+		done : false
+	}, function(err, todo) {
+		if (err){ res.send(err); }
+
+		// get and return all the todos after you create another
+		Directory.find(function(err, dirs) {
+			if (err) { res.send(err); }
+			res.json(dirs);
+			io.sockets.emit('added', { msg: 'added post' });
+			io.sockets.emit('new_dirs', { dirs: dirs });
+			io.sockets.emit('client_console', { dirs: dirs });
+		});
+	});
+});
+
+app.post('/api/children', function(req, res) {
+
+	io.sockets.emit('client_console', { request_body: req.body });
+
+	// var random_lower = Math.floor((Math.random() * 1000) + 1);
+	// var random_upper = Math.floor((Math.random() * (1000 - random_lower + 1) ) + random_lower)
+
+	// create a todo, information comes from AJAX request from Angular
+	Directory.create({
+		text : req.body.text,
+		hierarchy : 2,
+		//pool : '(' + random_lower + ' - ' + random_upper + ')',
 		done : false
 	}, function(err, todo) {
 		if (err){ res.send(err); }
