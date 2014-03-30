@@ -57,6 +57,8 @@ function rewriteDirs(dirs) {
 
 	}
 
+	console.log('here');
+
 
 	$('#tree_view').jstree('destroy');
 
