@@ -214,9 +214,8 @@ $(document).ready(function(){
 	        },
 	        events: {
 				show: function(opt) {
-					opt.$menu.find('.context-menu-item > span').attr('title', function() { 
-						return $(this).text(); 
-					});
+					var id_to_remove = $(this).attr('href');
+					opt.$menu.find('.context-menu-item > span').attr('data-remove', id_to_remove);
 				}
 			},
 	        items: {
