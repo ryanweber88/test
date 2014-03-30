@@ -215,7 +215,8 @@ $(document).ready(function(){
 	        events: {
 				show: function(opt) {
 					var id_to_remove = $(this).attr('href');
-					opt.$menu.find('.context-menu-item > span').attr('data-remove', id_to_remove);
+					//opt.$menu.find('.context-menu-item > span').attr('data-remove', id_to_remove);
+					opt.$menu.find('.context-menu-item > span').attr('ng-click', 'deleteDir(' + id_to_remove + ')');
 				}
 			},
 	        items: {
