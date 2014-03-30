@@ -31,7 +31,7 @@ socket.on('client_console', function(data) {
 });
 
 socket.on('new_dirs', function(data) {
-	rewriteDirs(data);
+	rewriteDirs(data.data);
 });
 
 function rewriteDirs(data) {
