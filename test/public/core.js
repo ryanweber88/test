@@ -81,6 +81,9 @@ function mainController($scope, $http) {
 					});
 				}
 
+				console.log('rewriting tree');
+
+				$('#tree_view').html();
 
 				$('#tree_view').jstree({
 					'core' : {
