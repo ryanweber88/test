@@ -212,6 +212,13 @@ $(document).ready(function(){
 	            		console.log('nil');
 	            }
 	        },
+	        events: {
+				show: function(opt) {
+					opt.$menu.find('.context-menu-item > span').attr('title', function() { 
+						return $(this).text(); 
+					});
+				}
+			},
 	        items: {
 	            "generate_randoms": {name: "Generate Numbers"},
 	            "remove_node": {name: "Remove Node"},
