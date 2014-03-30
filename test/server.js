@@ -18,13 +18,13 @@ function sendTime() {
     io.sockets.emit('time', { time: new Date().toJSON() });
 }
 
-function sendTest() {
-    io.sockets.emit('test', { test: "this is a test" });
-}
+// function sendTest() {
+//     io.sockets.emit('test', { test: "this is a test" });
+// }
 
 setInterval(sendTime, 10000);
 
-setInterval(sendTest, 3000);
+//setInterval(sendTest, 3000);
 
 // Emit welcome message on connection
 io.sockets.on('connection', function(socket) {
@@ -64,6 +64,7 @@ app.post('/api/dirs', function(req, res) {
 		Directory.find(function(err, dirs) {
 			if (err) { res.send(err); }
 			res.json(dirs);
+			io.sockets.emit('added', { msg: 'added post' });
 		});
 	});
 });
@@ -78,25 +79,14 @@ app.delete('/api/dirs/:dir_id', function(req, res) {
 		Directory.find(function(err, dirs) {
 			if (err) { res.send(err); }
 			res.json(dirs);
+			io.sockets.emit('removed', { msg: 'removed post' });
 		});
 	});
 });
-
-
 
 app.get('*', function(req, res) {
 	res.sendfile('./public/index.html'); // load the single view file (angular will handle the page changes on the front-end)
 });
 
-
-// app.listen(8080);
-// console.log('Listening on port 8080');
 console.log('Listening on port 8080');
 
-/*
-http.createServer(function (req, res) {
-  res.writeHead(200, {'Content-Type': 'text/plain'});
-  res.end('Hello World!\n');
-}).listen(3000);
-console.log('Server running at http://<your server ip address>:3000/');
-*/

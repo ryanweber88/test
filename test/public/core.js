@@ -18,6 +18,16 @@ socket.on('test', function(data) {
 socket.on('error', function() { console.error(arguments) });
 socket.on('message', function() { console.log(arguments) });
 
+//io.sockets.emit('added', { msg: 'added post' });
+
+socket.on('added', function(data) {
+	console.log(data);
+});
+
+socket.on('removed', function(data) {
+	console.log(data);
+});
+
 function mainController($scope, $http) {
 	$scope.formData = {};
 
