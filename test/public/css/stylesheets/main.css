@@ -12,3 +12,8 @@ body {
 #todo-list {
   margin-bottom: 30px;
 }
+
+/* line 10, ../sass/main.scss */
+.test {
+  font-weight: bold;
+}
