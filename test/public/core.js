@@ -1,7 +1,7 @@
 var scotchTodo = angular.module('testDirectory', []);
 
 
-var socket = io.connect('//localhost:8080');
+var socket = io.connect('http://50.112.173.66:8080');
 
 socket.on('welcome', function(data) {
     $('#messages').append('<li>' + data.message + '</li>');
