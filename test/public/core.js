@@ -233,15 +233,18 @@ $(document).ready(function(){
 	//     console.log('right clicked!');
 	// });
 
-	$('.jstree-anchor').on('mousedown', function(e) {
-		e.preventDefault();
-		switch (e.which) {
-	        case 3:
-	            console.log('right click');
-	            break;
-	        default:
-	            console.log('lol');
-    	}
-	});
+	// $('.jstree-anchor').on('mousedown', function(e) {
+	// 	e.preventDefault();
+	// 	switch (e.which) {
+	//         case 3:
+	//             console.log('right click');
+	//             break;
+	//         default:
+	//             console.log('lol');
+ //    	}
+	// });
+
+	$('.jstree-anchor').contextMenu();
+
 });
 
