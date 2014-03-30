@@ -2,6 +2,8 @@ var http = require('http');
 var express = require('express');
 var app = express();
 var mongoose = require('mongoose');
+var server = app.listen(8080);
+var io = require('socket.io').listen(server);
 
 mongoose.connect('mongodb://ryanweber88:Snickers1@novus.modulusmongo.net:27017/hOdu5jix');
 
@@ -11,6 +13,22 @@ app.configure(function() {
 	app.use(express.bodyParser()); 							// pull information from html in POST
 	app.use(express.methodOverride()); 						// simulate DELETE and PUT
 });
+
+function sendTime() {
+    io.sockets.emit('time', { time: new Date().toJSON() });
+}
+
+// Send current time every 10 secs
+setInterval(sendTime, 10000);
+
+// Emit welcome message on connection
+io.sockets.on('connection', function(socket) {
+    socket.emit('welcome', { message: 'Welcome!' });
+
+    socket.on('i am client', console.log);
+});
+
+
 
 var Directory = mongoose.model('Directory', {
 	text : String,
@@ -66,7 +84,8 @@ app.get('*', function(req, res) {
 });
 
 
-app.listen(8080);
+// app.listen(8080);
+// console.log('Listening on port 8080');
 console.log('Listening on port 8080');
 
 /*
