@@ -44,16 +44,14 @@ function rewriteDirs(dirs) {
 		// 	'text': dirs[index].text + ' ' + dirs[index].pool
 		// });
 
-		data.push(
-			{
-				{attributes: { href: dirs[index].id } },
-				'text': dirs[index].text + ' ' + dirs[index].pool,
-				'state': {
-					'selected' : false
-				},
-				children:[]
+		data.push({
+			// {attributes: { href: dirs[index].id } },
+			'text': dirs[index].text + ' ' + dirs[index].pool,
+			'state': {
+				'selected' : false
 			}
-		);
+			// children:[]
+		});
 
 	}
 
