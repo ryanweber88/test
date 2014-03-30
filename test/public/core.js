@@ -262,7 +262,7 @@ $(document).ready(function(){
 	        }
 	    });
 	    
-	    $('.context-menu-one').on('click', function(e){
+	    $('.context-menu-item').on('click', function(e){
 	        console.log('clicked', this);
 	    })
 	});
