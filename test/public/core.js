@@ -75,9 +75,9 @@ function mainController($scope, $http) {
 
 				var children = [];
 
-				for ( dir in data ) {
+				for ( index in data ) {
 					children.push({
-						'text': dir.text + ' ' + dir.pool
+						'text': dirs[index].text + ' ' + dirs[index].pool
 					});
 				}
 
