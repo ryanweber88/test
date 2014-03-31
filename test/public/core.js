@@ -26,7 +26,8 @@ function rewriteDirs(dirs) {
 			}
 			children[dirs[index].parent_id].push({
 				'a_attr': {
-					'href': dirs[index]._id
+					'href': dirs[index]._id,
+					'data-is-parent': 'false'
 				},
 				'text': dirs[index].text,
 				'state': {
@@ -49,7 +50,8 @@ function rewriteDirs(dirs) {
 		if ( dirs[index].hierarchy == 1 ) {
 			data.push({
 				'a_attr': {
-					'href': dirs[index]._id
+					'href': dirs[index]._id,
+					'data-is-parent': 'true'
 				},
 				'text': dirs[index].text + ' ' + dirs[index].pool,
 				'state': {
@@ -175,12 +177,16 @@ function mainController($scope, $http) {
 	            switch ( key ) {
 	            	case 'generate_randoms':
 	            		var parent_id       = $(this).attr('href');
+	            		var is_parent       = $(this).attr('data-is-parent');
 	            		var num_child_nodes = $('#num_child_nodes').val();
 
 	            		if ( num_child_nodes != '' &&
 	            			 num_child_nodes > 0 &&
-	            			 num_child_nodes <= 15 ) {
+	            			 num_child_nodes <= 15 &&
+	            			 is_parent == 'true' ) {
 	            			$scope.createChildren(parent_id, num_child_nodes);
+	            		} else if ( is_parent != 'true' ) {
+	            			alert('Can only create child nodes for a root node.');
 	            		} else {
 	            			alert('Please enter the number of child nodes to add (max 15)');
 	            		}
