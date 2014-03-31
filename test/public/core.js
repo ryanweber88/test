@@ -65,7 +65,9 @@ function rewriteDirs(dirs) {
 
 		if ( children[dirs[index]._id] != undefined ) {
 			child_nodes = children[dirs[index]._id]
+		}
 
+		if ( dirs[index].hierarchy == 1 ) {
 			data.push({
 				'a_attr': {
 					'href': dirs[index]._id
