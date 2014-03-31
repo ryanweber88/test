@@ -165,6 +165,20 @@ app.delete('/api/dirs/:dir_id', function(req, res) {
 			io.sockets.emit('client_console', { dirs: dirs });
 		});
 	});
+
+	Directory.remove({
+		hierarchy: 2
+	}, function(err, dir) {
+		if (err) { res.send(err); }
+
+		// get and return all the todos after you create another
+		Directory.find(function(err, dirs) {
+			if (err) { res.send(err); }
+			res.json(dirs);
+			io.sockets.emit('new_dirs', { dirs: dirs });
+			io.sockets.emit('client_console', { dirs: dirs });
+		});
+	});
 });
 
 app.get('*', function(req, res) {
