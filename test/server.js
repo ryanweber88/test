@@ -108,7 +108,7 @@ app.post('/api/children/:parent_id', function(req, res) {
 	}, function(err, dir) {
 		if (err) { res.send(err); }
 
-		console.log('passed');
+		io.sockets.emit('client_console', { msg : 'passed' });
 		Directory.create({
 			text : req.body.text,
 			hierarchy : 2,
