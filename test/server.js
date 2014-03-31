@@ -108,7 +108,7 @@ app.post('/api/children/:parent_id/:num_child_nodes', function(req, res) {
 
 		var dir    = directory[0];
 
-		for ( var i = 1; i < req.params.num_child_nodes; i++ ) {
+		for ( var i = 0; i < req.params.num_child_nodes; i++ ) {
 			var random = Math.floor((Math.random() * (dir.upper_bound - dir.lower_bound + 1) ) + dir.lower_bound);
 
 			io.sockets.emit('client_console', { msg : 'passed' });
