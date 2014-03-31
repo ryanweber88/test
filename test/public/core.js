@@ -82,7 +82,6 @@ function mainController($scope, $http) {
 	$http.get('/api/dirs')
 		.success(function(data) {
 			$scope.dirs = data;
-			// console.log(data);
 		})
 		.error(function(data) {
 			console.log('Error: ' + data);
@@ -101,8 +100,8 @@ function mainController($scope, $http) {
 	$scope.createDir = function() {
 		$http.post('/api/dirs', $scope.formData)
 			.success(function(data) {
-				$scope.formData = {};
-				$scope.dirs     = data;
+				$scope.formData.text = '';
+				$scope.dirs          = data;
 			})
 			.error(function(data) {
 				console.log('Error: ' + data);
@@ -112,8 +111,8 @@ function mainController($scope, $http) {
 	$scope.createParentNode = function() {
 		$http.post('/api/nodes', $scope.formData)
 			.success(function(data) {
-				$scope.formData = {};
-				$scope.dirs = data;
+				$scope.formData.text = '';
+				$scope.dirs          = data;
 				console.log(data);
 			})
 			.error(function(data) {
@@ -124,8 +123,8 @@ function mainController($scope, $http) {
 	$scope.createChildren = function(parent_id, num_child_nodes) {
 		$http.post('/api/children/' + parent_id + '/' + num_child_nodes, $scope.formData)
 			.success(function(data) {
-				$scope.formData = {};
-				$scope.dirs = data;
+				$scope.formData.text = '';
+				$scope.dirs          = data;
 				console.log(data);
 			})
 			.error(function(data) {
