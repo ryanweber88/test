@@ -121,8 +121,8 @@ function mainController($scope, $http) {
 			});
 	};
 
-	$scope.createChildren = function(parent_id) {
-		$http.post('/api/children/' + parent_id, $scope.formData)
+	$scope.createChildren = function(parent_id, num_child_nodes) {
+		$http.post('/api/children/' + parent_id + '/' + num_child_nodes, $scope.formData)
 			.success(function(data) {
 				$scope.formData = {};
 				$scope.dirs = data;
@@ -175,8 +175,16 @@ function mainController($scope, $http) {
 
 	            switch ( key ) {
 	            	case 'generate_randoms':
-	            		var parent_id = $(this).attr('href');
-	            		$scope.createChildren(parent_id);
+	            		var parent_id       = $(this).attr('href');
+	            		var num_child_nodes = $('#num_child_nodes').val();
+
+	            		if ( num_child_nodes != '' &&
+	            			 num_child_nodes > 0 &&
+	            			 num_child_nodes <= 15 ) {
+	            			$scope.createChildren(parent_id, num_child_nodes);
+	            		} else {
+	            			alert('Please enter a number between 1 and 15');
+	            		}
 	            		break;
 	            	case 'remove_node':
 	            		var id_to_remove = $(this).attr('href');
