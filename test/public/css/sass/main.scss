@@ -10,9 +10,25 @@ html{
 .dir-form{
 
 	.form-group{
-		display:inline-block;
+		float:left;
+
+		input{
+			height: 45px;
+			padding: 10px 16px;
+			font-size: 18px;
+			line-height: 1.33;
+			border-radius: 6px;
+			padding-right: 100px;
+			text-align:left;
+		}
 	}
 	button{
-		display:inline-block;
+		float:left;
+		padding: 10px 11px;
+		border-top-left-radius: 0px;
+		border-bottom-left-radius: 0px;
 	}
+}
+.tree-container{
+	margin-bottom:40px;
 }
