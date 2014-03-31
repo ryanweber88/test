@@ -199,7 +199,7 @@ function mainController($scope, $http) {
 	            switch ( key ) {
 	            	case 'generate_randoms':
 	            		var parent_id = $(this).attr('href');
-	            		console.log('generating randoms');
+	            		console.log('generating randoms for - ' + parent_id);
 	            		$scope.createChildren(parent_id);
 	            		break;
 	            	case 'remove_node':
