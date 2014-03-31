@@ -97,7 +97,7 @@ app.post('/api/children/:parent_id', function(req, res) {
 
 	io.sockets.emit('client_console', { request_body: req.body });
 
-	var parent = Directory.findById(parent_id).exec(callback);
+	var parent = Directory.findById(req.params.parent_id).exec(callback);
 
 	//console.log('parent', parent);
 
