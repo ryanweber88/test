@@ -141,7 +141,7 @@ function mainController($scope, $http) {
 	};
 
 	$scope.createChildren = function(parent_id) {
-		$http.post('/api/children' + parent_id, $scope.formData)
+		$http.post('/api/children/' + parent_id, $scope.formData)
 			.success(function(data) {
 				$scope.formData = {}; // clear the form so our user is ready to enter another
 				$scope.dirs = data;
