@@ -39,10 +39,33 @@ function rewriteDirs(dirs) {
 	var children = [];
 
 	for ( index in dirs ) {
+
+		if ( dirs[index].parent_id != null ) {
+			children[dirs[index].parent_id] = [];
+			children[dirs[index].parent_id].push({
+				'a_attr': {
+					'href': dirs[index]._id
+				},
+				'text': dirs[index].text,
+				'state': {
+					'selected' : false
+				}
+			});
+		}
+
+	}
+
+	for ( index in dirs ) {
 		// children.push({
 		// 	attributes: { href : dirs[index].id },
 		// 	'text': dirs[index].text + ' ' + dirs[index].pool
 		// });
+		
+		var child_nodes = [];
+
+		if ( children[dirs[index]._id] != undefined ) {
+			child_nodes = children[dirs[index]._id]
+		}
 
 		data.push({
 			'a_attr': {
@@ -50,9 +73,10 @@ function rewriteDirs(dirs) {
 			},
 			'text': dirs[index].text + ' ' + dirs[index].pool,
 			'state': {
+				'opened' : true,
 				'selected' : false
-			}
-			// children:[]
+			},
+			children: child_nodes
 		});
 
 	}
@@ -116,8 +140,8 @@ function mainController($scope, $http) {
 			});
 	};
 
-	$scope.createChildren = function() {
-		$http.post('/api/children', $scope.formData)
+	$scope.createChildren = function(parent_id) {
+		$http.post('/api/children' + parent_id, $scope.formData)
 			.success(function(data) {
 				$scope.formData = {}; // clear the form so our user is ready to enter another
 				$scope.dirs = data;
@@ -172,7 +196,9 @@ function mainController($scope, $http) {
 
 	            switch ( key ) {
 	            	case 'generate_randoms':
+	            		var parent_id = $(this).attr('href');
 	            		console.log('generating randoms');
+	            		$scope.createChildren(parent_id);
 	            		break;
 	            	case 'remove_node':
 	            		var id_to_remove = $(this).attr('href');

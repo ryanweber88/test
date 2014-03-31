@@ -18,7 +18,8 @@ app.configure(function() {
 var Directory = mongoose.model('Directory', {
 	text : String,
 	hierarchy : Number,
-	pool : String
+	pool : String,
+	parent_id: String
 });
 
 
@@ -46,14 +47,12 @@ app.post('/api/dirs', function(req, res) {
 
 	io.sockets.emit('client_console', { request_body: req.body });
 
-	// create a todo, information comes from AJAX request from Angular
 	Directory.create({
 		text : req.body.text,
 		done : false
 	}, function(err, todo) {
 		if (err){ res.send(err); }
 
-		// get and return all the todos after you create another
 		Directory.find(function(err, dirs) {
 			if (err) { res.send(err); }
 			res.json(dirs);
@@ -70,11 +69,11 @@ app.post('/api/nodes', function(req, res) {
 	var random_lower = Math.floor((Math.random() * 1000) + 1);
 	var random_upper = Math.floor((Math.random() * (1000 - random_lower + 1) ) + random_lower)
 
-	// create a todo, information comes from AJAX request from Angular
 	Directory.create({
 		text : req.body.text,
 		hierarchy : 1,
 		pool : '(' + random_lower + ' - ' + random_upper + ')',
+		parent_id : null,
 		done : false
 	}, function(err, todo) {
 		if (err){ res.send(err); }
@@ -90,18 +89,16 @@ app.post('/api/nodes', function(req, res) {
 	});
 });
 
-app.post('/api/children', function(req, res) {
+app.post('/api/children/:parent_id', function(req, res) {
 
 	io.sockets.emit('client_console', { request_body: req.body });
 
 	// var random_lower = Math.floor((Math.random() * 1000) + 1);
-	// var random_upper = Math.floor((Math.random() * (1000 - random_lower + 1) ) + random_lower)
 
-	// create a todo, information comes from AJAX request from Angular
 	Directory.create({
 		text : req.body.text,
 		hierarchy : 2,
-		//pool : '(' + random_lower + ' - ' + random_upper + ')',
+		parent_id : req.params.parent_id
 		done : false
 	}, function(err, todo) {
 		if (err){ res.send(err); }
