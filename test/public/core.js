@@ -182,7 +182,7 @@ function mainController($scope, $http) {
 	            			 num_child_nodes <= 15 ) {
 	            			$scope.createChildren(parent_id, num_child_nodes);
 	            		} else {
-	            			alert('Please enter a number between 1 and 15');
+	            			alert('Please enter the number of child nodes to add (max 15)');
 	            		}
 	            		break;
 	            	case 'remove_node':
