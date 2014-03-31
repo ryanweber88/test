@@ -65,19 +65,19 @@ function rewriteDirs(dirs) {
 
 		if ( children[dirs[index]._id] != undefined ) {
 			child_nodes = children[dirs[index]._id]
-		}
 
-		data.push({
-			'a_attr': {
-				'href': dirs[index]._id
-			},
-			'text': dirs[index].text + ' ' + dirs[index].pool,
-			'state': {
-				'opened' : true,
-				'selected' : false
-			},
-			children: child_nodes
-		});
+			data.push({
+				'a_attr': {
+					'href': dirs[index]._id
+				},
+				'text': dirs[index].text + ' ' + dirs[index].pool,
+				'state': {
+					'opened' : true,
+					'selected' : false
+				},
+				children: child_nodes
+			});
+		}
 
 	}
 
