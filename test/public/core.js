@@ -41,7 +41,10 @@ function rewriteDirs(dirs) {
 	for ( index in dirs ) {
 
 		if ( dirs[index].parent_id != null ) {
-			children[dirs[index].parent_id] = [];
+
+			if ( children[dirs[index].parent_id] == undefined ) {
+				children[dirs[index].parent_id] = [];
+			}
 			children[dirs[index].parent_id].push({
 				'a_attr': {
 					'href': dirs[index]._id
