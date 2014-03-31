@@ -108,9 +108,11 @@ app.post('/api/children/:parent_id', function(req, res) {
 	}, function(err, dir) {
 		if (err) { res.send(err); }
 
+		var random = Math.floor((Math.random() * (dir.upper_bound - dir.lower_bound + 1) ) + dir.lower_bound);
+
 		io.sockets.emit('client_console', { msg : 'passed' });
 		Directory.create({
-			text : req.body.text,
+			text : random,
 			hierarchy : 2,
 			parent_id : req.params.parent_id,
 			done : false
