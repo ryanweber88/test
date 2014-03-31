@@ -98,7 +98,7 @@ app.post('/api/children/:parent_id', function(req, res) {
 	Directory.create({
 		text : req.body.text,
 		hierarchy : 2,
-		parent_id : req.params.parent_id
+		parent_id : req.params.parent_id,
 		done : false
 	}, function(err, todo) {
 		if (err){ res.send(err); }
