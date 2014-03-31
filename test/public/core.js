@@ -1,31 +1,9 @@
 var scotchTodo = angular.module('testDirectory', []);
 
-
 var socket = io.connect('http://50.112.173.66:8080');
 
-socket.on('welcome', function(data) {
-    $('#messages').html('<li>' + data.message + '</li>');
-
-    socket.emit('i am client', {data: 'foo!'});
-});
-socket.on('time', function(data) {
-    console.log(data);
-    $('#messages').html('<li>' + data.time + '</li>');
-});
-socket.on('test', function(data) {
-    console.log(data);
-});
 socket.on('error', function() { console.error(arguments) });
 socket.on('message', function() { console.log(arguments) });
-
-socket.on('added', function(data) {
-	console.log(data);
-});
-
-socket.on('removed', function(data) {
-	console.log(data);
-});
-
 socket.on('client_console', function(data) {
 	console.log(data);
 });
@@ -35,9 +13,10 @@ socket.on('new_dirs', function(data) {
 });
 
 function rewriteDirs(dirs) {
-	var data = [];
+	var data     = [];
 	var children = [];
 
+	// Pull out all the child nodes and insert into arr
 	for ( index in dirs ) {
 
 		if ( dirs[index].parent_id != null ) {
@@ -58,11 +37,8 @@ function rewriteDirs(dirs) {
 
 	}
 
+	// Find parent nodes and apply children to them
 	for ( index in dirs ) {
-		// children.push({
-		// 	attributes: { href : dirs[index].id },
-		// 	'text': dirs[index].text + ' ' + dirs[index].pool
-		// });
 		
 		var child_nodes = [];
 
@@ -86,9 +62,10 @@ function rewriteDirs(dirs) {
 
 	}
 
-
+	// Destroy old tree
 	$('#tree_view').jstree('destroy');
 
+	// Generate new tree
 	$('#tree_view').jstree({
 		'core' : {
 		    'data' : data,
@@ -124,9 +101,8 @@ function mainController($scope, $http) {
 	$scope.createDir = function() {
 		$http.post('/api/dirs', $scope.formData)
 			.success(function(data) {
-				$scope.formData = {}; // clear the form so our user is ready to enter another
-				$scope.dirs = data;
-				// console.log(data);
+				$scope.formData = {};
+				$scope.dirs     = data;
 			})
 			.error(function(data) {
 				console.log('Error: ' + data);
@@ -136,7 +112,7 @@ function mainController($scope, $http) {
 	$scope.createParentNode = function() {
 		$http.post('/api/nodes', $scope.formData)
 			.success(function(data) {
-				$scope.formData = {}; // clear the form so our user is ready to enter another
+				$scope.formData = {};
 				$scope.dirs = data;
 				console.log(data);
 			})
@@ -148,7 +124,7 @@ function mainController($scope, $http) {
 	$scope.createChildren = function(parent_id) {
 		$http.post('/api/children/' + parent_id, $scope.formData)
 			.success(function(data) {
-				$scope.formData = {}; // clear the form so our user is ready to enter another
+				$scope.formData = {};
 				$scope.dirs = data;
 				console.log(data);
 			})
@@ -162,14 +138,12 @@ function mainController($scope, $http) {
 		$http.delete('/api/dirs/' + id)
 			.success(function(data) {
 				$scope.dirs = data;
-				console.log('deleted');
 				rewriteDirs(data);
 			})
 			.error(function(data) {
 				console.log('Error: ' + data);
 			});
 	};
-
 
 
 	// Setup jstree
@@ -202,12 +176,10 @@ function mainController($scope, $http) {
 	            switch ( key ) {
 	            	case 'generate_randoms':
 	            		var parent_id = $(this).attr('href');
-	            		console.log('generating randoms for - ' + parent_id);
 	            		$scope.createChildren(parent_id);
 	            		break;
 	            	case 'remove_node':
 	            		var id_to_remove = $(this).attr('href');
-	            		console.log('removing node');
 	    				$scope.deleteDir(id_to_remove);
 	            		break;
 	            	default:
@@ -216,9 +188,9 @@ function mainController($scope, $http) {
 	        },
 	        items: {
 	            "generate_randoms": {name: "Generate Numbers"},
-	            "remove_node": {name: "Remove Node"},
-	            "sep1": "---------",
-	            "quit": {name: "Quit"}
+	            "remove_node":      {name: "Remove Node"},
+	            "sep1":             "---------",
+	            "quit":             {name: "Quit"}
 	        }
 	    });
 	});
