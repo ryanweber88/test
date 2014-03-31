@@ -201,9 +201,7 @@ function mainController($scope, $http) {
 	        },
 	        items: {
 	            "generate_randoms": {name: "Generate Numbers"},
-	            "remove_node":      {name: "Remove Node"},
-	            "sep1":             "---------",
-	            "quit":             {name: "Quit"}
+	            "remove_node":      {name: "Remove Node"}
 	        }
 	    });
 	});
