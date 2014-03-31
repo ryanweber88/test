@@ -1,4 +1,4 @@
-var scotchTodo = angular.module('testDirectory', []);
+var directory_structure = angular.module('directoryStructure', []);
 
 var socket = io.connect('http://50.112.173.66:8080');
 
