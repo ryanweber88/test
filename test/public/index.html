@@ -35,12 +35,13 @@
 		</div>
 
 		<div id="dir-form" class="row">
-			<div class="col-sm-5 text-center">
+			<div class="col-sm-4 text-center">
 				<form class='dir-form'>
 					<div class="form-group">
 						<input type="text" class="form-control input-lg text-center" placeholder="New parent node name" ng-model="formData.text">
 					</div>
 					<button type="submit" class="btn btn-primary btn-lg add-btn" ng-click="createParentNode()">Add</button>
+					<input type='text' class='form-control input-lg text-center' placeholder='# of child nodes' ng-model='formData.number_of_children'
 				</form>
 			</div>
 			<div class='col-sm-5'>
