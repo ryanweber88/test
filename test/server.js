@@ -108,9 +108,9 @@ app.post('/api/children/:parent_id', function(req, res) {
 	}, function(err, dir) {
 		if (err) { res.send(err); }
 
-		io.sockets.emit('client_console', { dir: dir });
-		io.sockets.emit('client_console', { lower: dir.lower_bound });
-		io.sockets.emit('client_console', { upper: dir.upper_bound });
+		io.sockets.emit('client_console', { dir[0]: dir });
+		io.sockets.emit('client_console', { lower: dir[0].lower_bound });
+		io.sockets.emit('client_console', { upper: dir[0].upper_bound });
 
 		var random = Math.floor((Math.random() * (dir.upper_bound - dir.lower_bound + 1) ) + dir.lower_bound);
 
