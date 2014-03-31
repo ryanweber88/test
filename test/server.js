@@ -71,6 +71,8 @@ app.post('/api/nodes', function(req, res) {
 	var random_lower = Math.floor((Math.random() * 1000) + 1);
 	var random_upper = Math.floor((Math.random() * (1000 - random_lower + 1) ) + random_lower);
 
+	io.sockets.emit('client_console', { msg: 'randomlower - ' + random_lower });
+
 	Directory.create({
 		text : req.body.text,
 		hierarchy : 1,
