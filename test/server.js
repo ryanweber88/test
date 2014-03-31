@@ -105,10 +105,12 @@ app.post('/api/children/:parent_id', function(req, res) {
 
 	Directory.find({
 		_id : req.params.parent_id
-	}, function(err, dir) {
+	}, function(err, directory) {
 		if (err) { res.send(err); }
 
-		io.sockets.emit('client_console', { dir: dir[0] });
+		var dir = directory[0];
+
+		io.sockets.emit('client_console', { dirct: dir });
 		io.sockets.emit('client_console', { lower: dir.lower_bound });
 		io.sockets.emit('client_console', { upper: dir.upper_bound });
 
