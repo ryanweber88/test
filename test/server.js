@@ -99,13 +99,16 @@ app.post('/api/children/:parent_id', function(req, res) {
 
 	//var parent = Directory.findById(req.params.parent_id).exec(callback);
 
-	var parent = Directory.find({ _id: req.params.parent_id }).exec(callback);
+	//var parent = Directory.find({ _id: req.params.parent_id }).exec(callback);
 
 	//console.log('parent', parent);
 
-	// var random_lower = Math.floor((Math.random() * 1000) + 1);
-	var callback = function() {
-		console.log('executing callback');
+	Directory.find({
+		_id : req.params.parent_id
+	}, function(err, dir) {
+		if (err) { res.send(err); }
+
+		console.log('passed');
 		Directory.create({
 			text : req.body.text,
 			hierarchy : 2,
@@ -123,7 +126,30 @@ app.post('/api/children/:parent_id', function(req, res) {
 				io.sockets.emit('client_console', { dirs: dirs });
 			});
 		});
-	}
+
+	});
+
+	// var random_lower = Math.floor((Math.random() * 1000) + 1);
+	// var callback = function() {
+	// 	console.log('executing callback');
+	// 	Directory.create({
+	// 		text : req.body.text,
+	// 		hierarchy : 2,
+	// 		parent_id : req.params.parent_id,
+	// 		done : false
+	// 	}, function(err, todo) {
+	// 		if (err){ res.send(err); }
+
+	// 		// get and return all the todos after you create another
+	// 		Directory.find(function(err, dirs) {
+	// 			if (err) { res.send(err); }
+	// 			res.json(dirs);
+	// 			io.sockets.emit('added', { msg: 'added post' });
+	// 			io.sockets.emit('new_dirs', { dirs: dirs });
+	// 			io.sockets.emit('client_console', { dirs: dirs });
+	// 		});
+	// 	});
+	// }
 });
 
 app.delete('/api/dirs/:dir_id', function(req, res) {
