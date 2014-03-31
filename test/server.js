@@ -19,7 +19,9 @@ var Directory = mongoose.model('Directory', {
 	text : String,
 	hierarchy : Number,
 	pool : String,
-	parent_id: String
+	parent_id: String,
+	lower_bound: Number,
+	upper_bound: Number
 });
 
 
@@ -73,6 +75,8 @@ app.post('/api/nodes', function(req, res) {
 		text : req.body.text,
 		hierarchy : 1,
 		pool : '(' + random_lower + ' - ' + random_upper + ')',
+		lower_bound : ramdom_lower,
+		upper_bound : random_upper,
 		parent_id : null,
 		done : false
 	}, function(err, todo) {
@@ -93,25 +97,31 @@ app.post('/api/children/:parent_id', function(req, res) {
 
 	io.sockets.emit('client_console', { request_body: req.body });
 
+	var parent = Directory.findById(parent_id).exec(callback);
+
+	//console.log('parent', parent);
+
 	// var random_lower = Math.floor((Math.random() * 1000) + 1);
+	var callback = function() {
+		console.log('executing callback');
+		Directory.create({
+			text : req.body.text,
+			hierarchy : 2,
+			parent_id : req.params.parent_id,
+			done : false
+		}, function(err, todo) {
+			if (err){ res.send(err); }
 
-	Directory.create({
-		text : req.body.text,
-		hierarchy : 2,
-		parent_id : req.params.parent_id,
-		done : false
-	}, function(err, todo) {
-		if (err){ res.send(err); }
-
-		// get and return all the todos after you create another
-		Directory.find(function(err, dirs) {
-			if (err) { res.send(err); }
-			res.json(dirs);
-			io.sockets.emit('added', { msg: 'added post' });
-			io.sockets.emit('new_dirs', { dirs: dirs });
-			io.sockets.emit('client_console', { dirs: dirs });
+			// get and return all the todos after you create another
+			Directory.find(function(err, dirs) {
+				if (err) { res.send(err); }
+				res.json(dirs);
+				io.sockets.emit('added', { msg: 'added post' });
+				io.sockets.emit('new_dirs', { dirs: dirs });
+				io.sockets.emit('client_console', { dirs: dirs });
+			});
 		});
-	});
+	}
 });
 
 app.delete('/api/dirs/:dir_id', function(req, res) {
