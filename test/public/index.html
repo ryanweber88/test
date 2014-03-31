@@ -35,7 +35,7 @@
 		</div>
 
 		<div id="dir-form" class="row">
-			<div class="col-sm-4 text-center">
+			<div class="col-sm-5 text-center">
 				<form class='dir-form'>
 					<div class="form-group">
 						<input type="text" class="form-control input-lg text-center" placeholder="New parent node name" ng-model="formData.text">
@@ -43,13 +43,16 @@
 					<button type="submit" class="btn btn-primary btn-lg add-btn" ng-click="createParentNode()">Add</button>
 				</form>
 			</div>
+			<div class='col-sm-5'>
+				<div id='tree_view'></div>
+			</div>
 		</div>
 
 	</div>
 
-	<div class='container tree-container'>
+	<!-- <div class='container tree-container'>
 		<div id='tree_view'></div>
-	</div>
+	</div> -->
 
 </body>
 </html>
