@@ -7,12 +7,12 @@ html{
 	border-radius:4px;
 	background:#ccc;
 }
-.test{
-	font-weight:bold;
-}
-.test2{
-	font-weight:bold;
-}
-.test3{
-	font-weight:bold;
+.dir-form{
+
+	.form-group{
+		display:inline-block;
+	}
+	button{
+		display:inline-block;
+	}
 }
