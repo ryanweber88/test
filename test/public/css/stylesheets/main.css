@@ -4,21 +4,43 @@ html {
 }
 
 /* line 4, ../sass/main.scss */
-body {
-  padding-top: 50px;
+.clear {
+  clear: both;
 }
 
 /* line 7, ../sass/main.scss */
-#todo-list {
-  margin-bottom: 30px;
+.heading {
+  margin: 40px 0 20px 0;
+  padding: 20px;
+  border-radius: 4px;
+  background: #ccc;
 }
 
-/* line 10, ../sass/main.scss */
-.test {
-  font-weight: bold;
+/* line 15, ../sass/main.scss */
+.dir-form .form-group {
+  float: left;
+  width: 100%;
+}
+/* line 19, ../sass/main.scss */
+.dir-form .form-group input {
+  height: 45px;
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 6px;
+  padding-right: 100px;
+  text-align: left;
+}
+/* line 29, ../sass/main.scss */
+.dir-form button {
+  float: left;
+  padding: 10px 11px;
+  margin-left: -58px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
 }
 
-/* line 13, ../sass/main.scss */
-.test2 {
-  font-weight: bold;
+/* line 37, ../sass/main.scss */
+.tree-container {
+  margin-bottom: 40px;
 }
